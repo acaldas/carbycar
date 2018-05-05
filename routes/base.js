@@ -39,8 +39,7 @@ router.post("/signup", function(req, res) {
                 });
                 return;
             }
-            _login(req);
-            res.render("index");
+            _login(req, userData.username, () => res.redirect("/"));
         }
     );
 });
@@ -49,8 +48,7 @@ router.post("/login", function(req, res) {
     let username = req.body.username;
     User.verifyLogin(username, req.body.password, valid => {
         if (valid) {
-            _login(req, username);
-            res.redirect("/");
+            _login(req, username, () => res.redirect("/"));
         } else {
             res.render("index", { error: "Login inválido" });
         }
@@ -67,8 +65,11 @@ router.get("/logout", function(req, res, next) {
     });
 });
 
-const _login = function(req, username) {
-    req.session.username = username;
+const _login = function(req, username, callback) {
+    req.session.regenerate(function() {
+        req.session.username = username;
+        callback();
+    });
 };
 
 module.exports = router;
