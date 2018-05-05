@@ -9,21 +9,27 @@
 <body>
     <h1>
     </h1>
-    <p>
-        <% if (locals.authenticated) { %>
-            Welcome
-            <%= locals.username %>
-                <% } else { %>
-                    <form method="POST" action="/login">
-                        <label for="username">Nome de utilizador</label>
-                        <input type="text" name="username">
-                        <label for="password">Password</label>
-                        <input type="password" name="password">
-                        <input type="submit" />
-                    </form>
-                    <a href="/signup">Registar conta</a>
-                    <% } %>
-    </p>
+    <% if (typeof error !== "undefined") { %>
+        <h3 class="error">
+            <%= error %>
+        </h3>
+        <% } %>
+            <div>
+                <% if (locals.authenticated) { %>
+                    <p>Welcome
+                        <%= locals.username %>
+                    </p>
+                    <% } else { %>
+                        <form method="POST" action="/login">
+                            <label for="username">Nome de utilizador</label>
+                            <input type="text" name="username">
+                            <label for="password">Password</label>
+                            <input type="password" name="password">
+                            <input type="submit" />
+                        </form>
+                        <a href="/signup">Registar conta</a>
+                        <% } %>
+            </div>
 </body>
 
 </html>

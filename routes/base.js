@@ -10,7 +10,7 @@ router.get("/", function(req, res) {
 router.get("/signup", function(req, res) {
     res.render("signup", {
         vehicle_types: Vehicle.getVehicleTypes(),
-        district_list: ["Aldão", "Arões (São Romão)"]
+        district_list: User.getDistrictList()
     });
 });
 
@@ -27,18 +27,22 @@ router.post("/signup", function(req, res) {
         },
         error => {
             if (error) {
-                res.render("signup", { user: userData, error: error });
+                let errorMessage =
+                    error.code === 11000
+                        ? "Nome de utilizador já existente"
+                        : "Perfil inválido";
+                res.render("signup", {
+                    user: userData,
+                    error: errorMessage,
+                    vehicle_types: Vehicle.getVehicleTypes(),
+                    district_list: User.getDistrictList()
+                });
                 return;
             }
             _login(req);
             res.render("index");
         }
     );
-
-    res.render("signup", {
-        vehicle_types: Vehicle.getVehicleTypes(),
-        district_list: ["Aldão", "Arões (São Romão)"]
-    });
 });
 
 router.post("/login", function(req, res) {

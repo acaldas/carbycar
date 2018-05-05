@@ -31,9 +31,16 @@ UserSchema.pre("save", function(next) {
     });
 });
 
+UserSchema.statics.getDistrictList = function() {
+    return DISTRICT_LIST;
+};
+
 UserSchema.statics.verifyLogin = function(username, password, callback) {
     User.findOne({ username: username }, function(err, user) {
-        if (err) throw err;
+        if (err || !user) {
+            callback(false);
+            return;
+        }
 
         user._comparePassword(password, function(err, isMatch) {
             if (err) throw err;
