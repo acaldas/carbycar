@@ -1,0 +1,23 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "nodemon",
+            "runtimeExecutable": "nodemon",
+            "program": "${workspaceFolder}\\bin\\www",
+            "restart": true,
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen",
+            "env": {
+                "SESSION_SECRET": "qoDWDXrfu4",
+                "MONGODB_URI":
+                    "mongodb://heroku_zxftlvjx:t4arfsedfhvbgo9ke1p88mc0lu@ds163119.mlab.com:63119/heroku_zxftlvjx"
+            }
+        }
+    ]
+}

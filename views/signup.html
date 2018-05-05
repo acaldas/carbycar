@@ -1,0 +1,30 @@
+<div class="signup">
+    <form class="form form-signup" action="/users" method="post">
+        <h3>Perfil</h3>
+        <label for="username">Nome de utilizador</label>
+        <input type="text" name="username">
+        <label for="password">Password</label>
+        <input type="password" name="password">
+        <label for="name">Nome</label>
+        <input type="text" name="name">
+        <label for="district">Freguesia</label>
+        <select name="district">
+            <% for(var index = 0; index < district_list.length; index++) {%>
+                <option value="<%= district_list[index] %>">
+                    <%= district_list[index] %>
+                </option>
+                <% } %>
+        </select>
+        <h3>Veículo</h3>
+        <label for="vehicle">Viatura</label>
+        <select name="vehicle">
+            <% for(var index = 0; index < vehicle_types.length; index++) {%>
+                <option value="<%= vehicle_types[index] %>">
+                    <%= vehicle_types[index] %>
+                </option>
+                <% } %>
+        </select>
+        <h3>Rota</h3>
+        <input type="submit" name="Registar">
+    </form>
+</div>

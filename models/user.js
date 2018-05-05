@@ -1,15 +1,8 @@
 const bcrypt = require("bcrypt");
 const mongoose = require("mongoose");
+const Vehicle = require("./vehicle");
 
 const DISTRICT_LIST = ["Aldão", "Arões (São Romão)"];
-const VEHICLE_LIST = [
-    "Ligeiro de Passageiros",
-    "Ligeiro de Mercadorias",
-    "Pesado de Passageiros",
-    "Pesado de Mercadorias",
-    "Motociclo",
-    "Outro"
-];
 
 const SALT_WORK_FACTOR = 10;
 const Schema = mongoose.Schema;
@@ -19,35 +12,30 @@ const UserSchema = new Schema({
     password: { type: String, required: true },
     name: { type: String, required: true },
     district: { type: String, required: true, enum: DISTRICT_LIST },
-    vehicle: { type: String, required: true, enum: VEHICLE_LIST }
+    vehicle: { type: Vehicle.schema, required: true }
 });
 
 UserSchema.pre("save", function(next) {
-    var user = this;
-
-    // only hash the password if it has been modified (or is new)
+    let user = this;
     if (!user.isModified("password")) return next();
 
-    // generate a salt
     bcrypt.genSalt(SALT_WORK_FACTOR, function(err, salt) {
         if (err) return next(err);
 
-        // hash the password using our new salt
         bcrypt.hash(user.password, salt, function(err, hash) {
             if (err) return next(err);
 
-            // override the cleartext password with the hashed one
             user.password = hash;
             next();
         });
     });
 });
 
-UserSchema.methods.verifyUser = function(username, password, callback) {
+UserSchema.statics.verifyLogin = function(username, password, callback) {
     User.findOne({ username: username }, function(err, user) {
         if (err) throw err;
 
-        user.comparePassword(password, function(err, isMatch) {
+        user._comparePassword(password, function(err, isMatch) {
             if (err) throw err;
             callback(isMatch);
         });
@@ -61,4 +49,4 @@ UserSchema.methods._comparePassword = function(candidatePassword, cb) {
     });
 };
 
-mongoose.model("User", UserSchema);
+const User = (module.exports = mongoose.model("User", UserSchema));

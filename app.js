@@ -1,33 +1,48 @@
-var createError = require("http-errors");
-var express = require("express");
-var path = require("path");
-var cookieParser = require("cookie-parser");
-var logger = require("morgan");
-var mongoose = require("mongoose");
+const createError = require("http-errors");
+const express = require("express");
+const path = require("path");
+const cookieParser = require("cookie-parser");
+const logger = require("morgan");
+const session = require("express-session");
+const mongoStore = require("connect-mongo")(session);
+const mongoose = require("mongoose");
 
-var indexRouter = require("./routes/index");
-var usersRouter = require("./routes/users");
+const routes = require("./routes");
 
-var app = express();
+const app = express();
 
-// view engine setup
 app.engine("html", require("ejs").renderFile);
 app.set("view engine", "html");
 
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, "public")));
 
-// database setup
-mongoose.connect(process.env.MONGO_URI2);
+mongoose.connect(process.env.MONGODB_URI);
 mongoose.Promise = global.Promise;
-var db = mongoose.connection;
+const db = mongoose.connection;
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
-app.use("/", indexRouter);
-app.use("/users", usersRouter);
+const session_secret = process.env.SESSION_SECRET || "aaa";
+app.use(cookieParser());
+app.use(
+    session({
+        secret: session_secret,
+        resave: false,
+        saveUninitialized: true,
+        store: new mongoStore({ mongooseConnection: db })
+    })
+);
+app.use(express.static(path.join(__dirname, "public")));
+
+app.use(function(req, res, next) {
+    let username = req.session.username;
+    res.locals.username = username;
+    res.locals.authenticated = username && username.length;
+    next();
+});
+
+app.use(routes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -35,7 +50,7 @@ app.use(function(req, res, next) {
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function(err, req, res) {
     // set locals, only providing error in development
     res.locals.message = err.message;
     res.locals.error = req.app.get("env") === "development" ? err : {};
