@@ -1,44 +1,67 @@
-<div class="signup">
-    <% var user = typeof user === "undefined" ? {} : user %>
-        <form class="form form-signup" action="/signup" method="post">
-            <% if (typeof error !== "undefined") { %>
-                <h3 class="error">
-                    <%= error %>
-                </h3>
-                <% } %>
-                    <h3>Perfil</h3>
-                    <label for="username">Nome de utilizador</label>
-                    <input type="text" name="username" value="<%= user.username %>" required="true">
-                    <label for="password">Password</label>
-                    <input type="password" name="password" value="<%= user.password %>" required="true">
-                    <label for="name">Nome</label>
-                    <input type="text" name="name" value="<%= user.name %>" required="true">
-                    <label for="district">Freguesia</label>
-                    <select name="district">
-                        <% for(var index = 0; index < district_list.length; index++) {
-                let district = district_list[index];
-                let selected = district === user.district;
-            %>
-                            <option value="<%= district %>" <% if (selected) { %>selected
-                                <% } %>>
-                                    <%= district %>
-                            </option>
+<html>
+
+<head>
+    <%- include("partials/head.html") -%>
+</head>
+
+<body>
+    <%- include("partials/header.html") -%>
+        <div class="content">
+            <div class="signup">
+                <% var user = typeof user === "undefined" ? {} : user %>
+                    <form class="form form-signup" action="/signup" method="post">
+                        <h2>Criar conta</h2>
+                        <% if (typeof error !== "undefined") { %>
+                            <h3 class="error">
+                                <%= error %>
+                            </h3>
                             <% } %>
-                    </select>
-                    <h3>Veículo</h3>
-                    <label for="vehicle">Viatura</label>
-                    <select name="vehicle" value="user.vehicle">
-                        <% for(var index = 0; index < vehicle_types.length; index++) {
-                let vehicle = vehicle_types[index];
-                let selected = vehicle === user.vehicle;
-                %>
-                            <option value="<%= vehicle %>" <% if (selected) { %>selected
-                                <% } %>>
-                                    <%= vehicle %>
-                            </option>
-                            <% } %>
-                    </select>
-                    <h3>Rota</h3>
-                    <input type="submit" name="Registar">
-        </form>
-</div>
+                                <div class="form-field">
+                                    <label for="username">Nome de utilizador</label>
+                                    <input type="text" name="username" value="<%= user.username %>" required="true">
+                                </div>
+                                <div class="form-field">
+                                    <label for="password">Password</label>
+                                    <input type="password" name="password" value="<%= user.password %>" required="true">
+                                </div>
+                                <div class="form-field">
+                                    <label for="name">Nome</label>
+                                    <input type="text" name="name" value="<%= user.name %>" required="true">
+                                </div>
+                                <div class="form-field">
+                                    <label for="district">Freguesia</label>
+                                    <select name="district">
+                                        <% for(var index = 0; index < district_list.length; index++) {
+                                                let district = district_list[index];
+                                                let selected = district === user.district;
+                                            %>
+                                            <option value="<%= district %>" <% if (selected) { %>selected
+                                                <% } %>>
+                                                    <%= district %>
+                                            </option>
+                                            <% } %>
+                                    </select>
+                                </div>
+                                <div class="form-field">
+                                    <label for="vehicle">Viatura</label>
+                                    <select name="vehicle" value="user.vehicle">
+                                        <option selected value> N/A </option>
+                                        <% for(var index = 0; index < vehicle_types.length; index++) {
+                                    let vehicle = vehicle_types[index];
+                                    let selected = vehicle === user.vehicle;
+                                    %>
+                                            <option value="<%= vehicle %>" <% if (selected) { %>selected
+                                                <% } %>>
+                                                    <%= vehicle %>
+                                            </option>
+                                            <% } %>
+                                    </select>
+                                </div>
+                                <input type="submit" name="Registar">
+                    </form>
+            </div>
+        </div>
+        <%- include("partials/footer.html") -%>
+</body>
+
+</html>

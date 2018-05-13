@@ -1,0 +1,40 @@
+.footer {
+    background-color: #706f71;
+    color: #ffffff;
+    font-size: 0px;
+}
+
+.footer .footer-content {
+    height: 220px;
+    padding: 50px 30px;
+    max-width: 1280px;
+    margin: 0px auto;
+}
+
+.footer .left,
+.footer .right {
+    width: 50%;
+    display: inline-block;
+    font-size: 16px;
+    height: 100%;
+    vertical-align: top;
+    box-sizing: border-box;
+}
+
+.footer .left {
+    padding-right: 20px;
+}
+
+.footer .right {
+    padding-left: 10%;
+    text-align: left;
+}
+
+.footer h3 {
+    margin-top: 0px;
+}
+
+.footer .map {
+    color: #000000;
+    height: 100%;
+}

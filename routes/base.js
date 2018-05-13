@@ -1,4 +1,5 @@
 const express = require("express");
+const config = require("../config");
 const User = require("../models/user");
 const Vehicle = require("../models/vehicle");
 const router = express.Router();
@@ -10,13 +11,15 @@ router.get("/", function(req, res) {
 router.get("/signup", function(req, res) {
     res.render("signup", {
         vehicle_types: Vehicle.getVehicleTypes(),
-        district_list: User.getDistrictList()
+        district_list: config.Districts
     });
 });
 
 router.post("/signup", function(req, res) {
     let userData = req.body;
-    let vehicle = new Vehicle({ type: userData.vehicle });
+    let vehicle = userData.vehicle
+        ? new Vehicle({ type: userData.vehicle })
+        : null;
     User.create(
         {
             username: userData.username,
@@ -35,13 +38,17 @@ router.post("/signup", function(req, res) {
                     user: userData,
                     error: errorMessage,
                     vehicle_types: Vehicle.getVehicleTypes(),
-                    district_list: User.getDistrictList()
+                    district_list: config.Districts
                 });
                 return;
             }
             _login(req, userData.username, () => res.redirect("/"));
         }
     );
+});
+
+router.get("/login", function(req, res) {
+    res.render("login");
 });
 
 router.post("/login", function(req, res) {

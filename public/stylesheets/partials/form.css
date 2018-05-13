@@ -1,0 +1,39 @@
+.form {
+    display: inline-block;
+    text-align: left;
+}
+
+.form .form-field {
+    text-align: left;
+}
+
+.form label {
+    display: inline-block;
+    font-weight: bold;
+}
+
+.form input,
+.form select {
+    display: block;
+    margin: 5px 0px 20px 0px;
+    border: 2px solid #706f71;
+    padding: 5px;
+}
+
+.form input:focus,
+.form select:focus {
+    border-color: #000000;
+}
+
+.form input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 30px white inset;
+}
+
+.form input[type="submit"] {
+    padding: 5px 10px;
+    padding: 5px 10px;
+    border: 1px solid #706f71;
+    font-weight: bold;
+    background: #000000;
+    color: #ffffff;
+}

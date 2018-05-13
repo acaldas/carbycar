@@ -1,0 +1,12 @@
+.signup .form.form-signup h2 {
+    margin-top: 0px;
+}
+
+.signup .form.form-signup input,
+.signup .form.form-signup select {
+    width: 250px;
+}
+
+.signup .form.form-signup input[type="submit"] {
+    width: auto;
+}

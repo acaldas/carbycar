@@ -1,0 +1,31 @@
+html {
+    height: 100%;
+}
+
+body {
+    font-family: "Open Sans", sans-serif;
+    margin: 0px auto;
+    box-sizing: border-box;
+    height: 100%;
+    text-align: center;
+}
+
+body .content {
+    padding: 40px 30px;
+}
+
+.button {
+    background: black;
+    color: white;
+}
+
+input,
+textarea,
+select,
+button {
+    font-family: "Open Sans", sans-serif;
+}
+
+.error {
+    color: #ec2125;
+}

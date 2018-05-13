@@ -1,0 +1,53 @@
+.header {
+    background-size: contain;
+    width: 100%;
+    position: relative;
+    text-align: center;
+    height: 30vh;
+    position: relative;
+    text-align: center;
+    background: url(../../images/pattern-left.svg) no-repeat left top,
+        url(../../images/pattern-right.svg) no-repeat right top;
+}
+
+.header .background {
+    width: 100%;
+    height: auto;
+}
+
+.header .logo {
+    position: absolute;
+    top: 50%;
+    left: 0px;
+    right: 0px;
+    max-height: 87%;
+    object-fit: contain;
+    width: 28%;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+    margin: 0px auto;
+    display: block;
+}
+
+.header .slogan {
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    bottom: 1.5vw;
+}
+
+.header .slogan h2 {
+    text-transform: uppercase;
+    background-color: rgba(236, 33, 37, 0.6);
+    padding: 0px 5px;
+    font-size: 2vmax;
+    color: #ffffff;
+    white-space: nowrap;
+    margin: 0px;
+    display: inline-block;
+    text-shadow: 1px 1px rgba(0, 0, 0, 0.5);
+}
+
+.header .slogan span {
+    color: #ec2125;
+}

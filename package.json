@@ -5,7 +5,8 @@
     "scripts": {
         "start": "node ./bin/www",
         "devstart": "nodemon ./bin/www",
-        "debug": "nodemon --inspect ./bin/www"
+        "debug": "nodemon --inspect ./bin/www --ignore 'public/scripts/*.js'",
+        "watch": "gulp"
     },
     "dependencies": {
         "bcrypt": "^2.0.1",
@@ -20,6 +21,12 @@
         "morgan": "~1.9.0"
     },
     "devDependencies": {
-        "nodemon": "^1.17.3"
+        "autoprefixer": "^8.5.0",
+        "gulp": "^3.9.1",
+        "gulp-concat-css": "^3.1.0",
+        "gulp-postcss": "^7.0.1",
+        "gulp-sourcemaps": "^2.6.4",
+        "nodemon": "^1.17.3",
+        "precss": "^3.1.2"
     }
 }

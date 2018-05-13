@@ -1,8 +1,7 @@
 const bcrypt = require("bcrypt");
 const mongoose = require("mongoose");
+const config = require("../config");
 const Vehicle = require("./vehicle");
-
-const DISTRICT_LIST = ["Aldão", "Arões (São Romão)"];
 
 const SALT_WORK_FACTOR = 10;
 const Schema = mongoose.Schema;
@@ -11,8 +10,8 @@ const UserSchema = new Schema({
     username: { type: String, required: true, index: { unique: true } },
     password: { type: String, required: true },
     name: { type: String, required: true },
-    district: { type: String, required: true, enum: DISTRICT_LIST },
-    vehicle: { type: Vehicle.schema, required: true }
+    district: { type: String, required: true, enum: config.Districts },
+    vehicle: { type: Vehicle.schema }
 });
 
 UserSchema.pre("save", function(next) {
@@ -30,10 +29,6 @@ UserSchema.pre("save", function(next) {
         });
     });
 });
-
-UserSchema.statics.getDistrictList = function() {
-    return DISTRICT_LIST;
-};
 
 UserSchema.statics.verifyLogin = function(username, password, callback) {
     User.findOne({ username: username }, function(err, user) {

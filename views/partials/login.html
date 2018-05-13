@@ -1,0 +1,17 @@
+<% var user = typeof user === "undefined" ? {} : user %>
+    <form class="form form-login" action="/login" method="post">
+        <% if (typeof error !== "undefined") { %>
+            <h3 class="error">
+                <%= error %>
+            </h3>
+            <% } %>
+                <div class="form-field">
+                    <label for="username">Nome de utilizador:</label>
+                    <input type="text" name="username" value="<%= user.username %>" required="true">
+                </div>
+                <div class="form-field">
+                    <label for="password">Password:</label>
+                    <input type="password" name="password" value="<%= user.password %>" required="true">
+                </div>
+                <input class="button" type="submit" value="Login">
+    </form>

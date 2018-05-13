@@ -2,34 +2,23 @@
 <html>
 
 <head>
-    <title>Carbycar</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <%- include("partials/head.html") -%>
 </head>
 
 <body>
-    <h1>
-    </h1>
-    <% if (typeof error !== "undefined") { %>
-        <h3 class="error">
-            <%= error %>
-        </h3>
-        <% } %>
+    <%- include("partials/header.html") -%>
+        <div class="content">
             <div>
                 <% if (locals.authenticated) { %>
                     <p>Welcome
                         <%= locals.username %>
                     </p>
                     <% } else { %>
-                        <form method="POST" action="/login">
-                            <label for="username">Nome de utilizador</label>
-                            <input type="text" name="username">
-                            <label for="password">Password</label>
-                            <input type="password" name="password">
-                            <input type="submit" />
-                        </form>
-                        <a href="/signup">Registar conta</a>
-                        <% } %>
+                        <%- include("partials/login.html") -%>
+                            <% } %>
             </div>
+        </div>
+        <%- include("partials/footer.html") -%>
 </body>
 
 </html>

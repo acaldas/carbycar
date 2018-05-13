@@ -17,7 +17,8 @@
                 "SESSION_SECRET": "qoDWDXrfu4",
                 "MONGODB_URI":
                     "mongodb://heroku_zxftlvjx:t4arfsedfhvbgo9ke1p88mc0lu@ds163119.mlab.com:63119/heroku_zxftlvjx"
-            }
+            },
+            "runtimeArgs": ["--ignore", "public/**/*"]
         }
     ]
 }
