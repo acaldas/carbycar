@@ -128,8 +128,8 @@ button {
   height: 30vh;
   position: relative;
   text-align: center;
-  background: url("images/pattern-left.svg") no-repeat left -1px top,
-        url("images/pattern-right.svg") no-repeat right top -2px;
+  background: url("../images/pattern-left.svg") no-repeat left -1px top,
+        url("../images/pattern-right.svg") no-repeat right top -2px;
 }
 
 .header .background {
