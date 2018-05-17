@@ -39,7 +39,7 @@ UserSchema.statics.verifyLogin = function(email, password, callback) {
 
         user._comparePassword(password, function(err, isMatch) {
             if (err) throw err;
-            callback(isMatch);
+            callback(isMatch, user);
         });
     });
 };

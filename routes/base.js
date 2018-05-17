@@ -53,9 +53,9 @@ router.get("/login", function(req, res) {
 
 router.post("/login", function(req, res) {
     let email = req.body.email;
-    User.verifyLogin(email, req.body.password, valid => {
+    User.verifyLogin(email, req.body.password, (valid, user) => {
         if (valid) {
-            _login(req, email, () => res.redirect("/"));
+            _login(req, user, () => res.redirect("/"));
         } else {
             res.render("index", { error: "Login inválido" });
         }
@@ -72,9 +72,10 @@ router.get("/logout", function(req, res, next) {
     });
 });
 
-const _login = function(req, email, callback) {
-    req.session.regenerate(function() {
-        req.session.email = email;
+const _login = function(req, user, callback) {
+    req.session.regenerate(() => {
+        req.session.email = user.email;
+        req.session.name = user.name;
         callback();
     });
 };
