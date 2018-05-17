@@ -7,7 +7,7 @@ const SALT_WORK_FACTOR = 10;
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
-    username: { type: String, required: true, index: { unique: true } },
+    email: { type: String, required: true, index: { unique: true } },
     password: { type: String, required: true },
     name: { type: String, required: true },
     district: { type: String, required: true, enum: config.Districts },
@@ -30,8 +30,8 @@ UserSchema.pre("save", function(next) {
     });
 });
 
-UserSchema.statics.verifyLogin = function(username, password, callback) {
-    User.findOne({ username: username }, function(err, user) {
+UserSchema.statics.verifyLogin = function(email, password, callback) {
+    User.findOne({ email: email }, function(err, user) {
         if (err || !user) {
             callback(false);
             return;

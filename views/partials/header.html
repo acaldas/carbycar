@@ -1,8 +1,8 @@
 <div class="navbar">
     <a href="/">Home</a>
     <% if (locals.authenticated) { %>
-        <a href="/user/<%= locals.username %>">Perfil</a>
-        <a href="/logout">Logout</a>
+        <a href="/user/<%= locals.email %>">Perfil</a>
+        <a href="/logout">Sair</a>
         <% } else { %>
             <a href="/login">Login</a>
             <a href="/signup">Criar conta</a>

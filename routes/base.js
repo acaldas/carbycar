@@ -22,7 +22,7 @@ router.post("/signup", function(req, res) {
         : null;
     User.create(
         {
-            username: userData.username,
+            email: userData.email,
             password: userData.password,
             name: userData.name,
             district: userData.district,
@@ -42,7 +42,7 @@ router.post("/signup", function(req, res) {
                 });
                 return;
             }
-            _login(req, userData.username, () => res.redirect("/"));
+            _login(req, userData, () => res.redirect("/"));
         }
     );
 });
@@ -52,10 +52,10 @@ router.get("/login", function(req, res) {
 });
 
 router.post("/login", function(req, res) {
-    let username = req.body.username;
-    User.verifyLogin(username, req.body.password, valid => {
+    let email = req.body.email;
+    User.verifyLogin(email, req.body.password, valid => {
         if (valid) {
-            _login(req, username, () => res.redirect("/"));
+            _login(req, email, () => res.redirect("/"));
         } else {
             res.render("index", { error: "Login inválido" });
         }
@@ -72,9 +72,9 @@ router.get("/logout", function(req, res, next) {
     });
 });
 
-const _login = function(req, username, callback) {
+const _login = function(req, email, callback) {
     req.session.regenerate(function() {
-        req.session.username = username;
+        req.session.email = email;
         callback();
     });
 };

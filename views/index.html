@@ -11,7 +11,7 @@
             <div>
                 <% if (locals.authenticated) { %>
                     <p>Welcome
-                        <%= locals.username %>
+                        <%= locals.name %>
                     </p>
                     <% } else { %>
                         <%- include("partials/login.html") -%>
