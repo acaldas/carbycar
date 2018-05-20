@@ -1,4 +1,5 @@
 const express = require("express");
+const Location = require("../models/location");
 const Route = require("../models/route");
 const Vehicle = require("../models/vehicle");
 const router = express.Router();
@@ -40,13 +41,22 @@ router.post("/", checkAuth, (req, res) => {
     let vehicle = routeData.vehicle
         ? new Vehicle({ type: routeData.vehicle })
         : null;
+
+    let location = routeData.locationText
+        ? new Location({
+              text: routeData.locationText,
+              latitude: routeData.locationLatitude,
+              longitude: routeData.locationLongitude
+          })
+        : null;
     Route.create(
         {
             driver: routeData.driver,
             vehicle: vehicle,
             days: routeData.days,
             time: routeData.time,
-            seats: routeData.seats
+            seats: routeData.seats,
+            location: location
         },
         (error, route) => {
             if (error) {

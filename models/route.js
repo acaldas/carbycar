@@ -44,8 +44,12 @@ const RouteSchema = new Schema(
     }
 );
 
+RouteSchema.virtual("availableSeats").get(() => {
+    return this.seats - this.passengers.length;
+});
+
 RouteSchema.virtual("isFull").get(() => {
-    return this.seats - this.passengers.length <= 0;
+    return this.availableSeats <= 0;
 });
 
 RouteSchema.methods.addPassenger = function(passenger, callback) {

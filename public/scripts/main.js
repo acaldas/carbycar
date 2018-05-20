@@ -13,3 +13,5 @@ var createMap = function() {
     });
     infowindow.open(map, marker);
 };
+
+createMap();
