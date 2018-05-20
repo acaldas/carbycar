@@ -4,7 +4,11 @@ const User = require("../models/user");
 const router = express.Router();
 
 router.get("/", function(req, res) {
-    res.render("index");
+    if (req.session.userId) {
+        res.redirect("/routes");
+    } else {
+        res.render("index");
+    }
 });
 
 router.get("/signup", function(req, res) {
