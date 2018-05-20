@@ -123,6 +123,9 @@ dl ul {
 .footer .map {
   color: #000000;
   height: 100%;
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 .form {
   display: inline-block;

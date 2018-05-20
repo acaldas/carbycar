@@ -17,7 +17,7 @@
                 "SESSION_SECRET": "qoDWDXrfu4",
                 "MONGODB_URI":
                     "mongodb://heroku_zxftlvjx:t4arfsedfhvbgo9ke1p88mc0lu@ds163119.mlab.com:63119/heroku_zxftlvjx",
-                "GOOGLE_MAPS_API": "AIzaSyAxhu2M5AiUSx1pI5avx1pgiYmgJfIZ0rQ"
+                "GOOGLE_MAPS_API": "AIzaSyDVYpUb6R0uhescrYfZVCmfLCnF5R71Kcs"
             },
             "runtimeArgs": ["--ignore", "public/**/*"]
         }

@@ -60,12 +60,12 @@
                 </dd>
                 <dt class="route-trip-label">Viagem recomendada:</dt>
                 <dd class="route-trip">
-                    <iframe width="500" height="400" frameborder="0" allowfullscreen src="<%='https://www.google.com/maps/embed/v1/directions?key=AIzaSyAxhu2M5AiUSx1pI5avx1pgiYmgJfIZ0rQ&' + route.getRouteQueryString()%>">
+                    <iframe width="500" height="400" frameborder="0" allowfullscreen src="<%='https://www.google.com/maps/embed/v1/directions?key=AIzaSyDVYpUb6R0uhescrYfZVCmfLCnF5R71Kcs&' + route.getRouteQueryString()%>">
                     </iframe>
                 </dd>
                 <% if (locals.userId !== route.driver.id) { %>
                     <form class="form" method="POST" action="<%=route.id%>/passenger">
-                        <h3>Partilhar boleia</h3>
+                        <h3>Adicionar passageiro</h3>
                         <input name="userId" value="<%=locals.userId%>" class="hidden" />
                         <div class="form-field">
                             <label>Localização: </label>
