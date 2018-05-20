@@ -1,10 +1,15 @@
 const mongoose = require("mongoose");
+const googleMaps = require("@google/maps");
 const Location = require("../models/location");
 const Passenger = require("../models/passenger");
 const Vehicle = require("./vehicle");
 const config = require("../config");
 
 const Schema = mongoose.Schema;
+
+const googleMapsClient = googleMaps.createClient({
+    key: process.env.GOOGLE_MAPS_API
+});
 
 const DAY_TYPES = [
     "Segunda-feira",
@@ -69,6 +74,18 @@ RouteSchema.methods.getRouteQueryString = function() {
         "41.45857298561265,-8.263590978235015",
         "41.45657889577495,-8.278310941308632"
     ];
+
+    var test = googleMapsClient.directions(
+        {
+            origin: toSchool ? this.location : schoolLocation,
+            destination: toSchool ? schoolLocation : this.location,
+            mode: "driving",
+            optimize: true
+        },
+        function(response) {
+            console.log(response.json.results);
+        }
+    );
 
     query = waypoints.length
         ? query + "&waypoints=" + waypoints.join("|") + "&optimizeWaypoints=1"
