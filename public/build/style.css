@@ -331,3 +331,110 @@ dl ul {
   width: 400px;
   height: 320px;
 }
+
+.route-list a.share-route {
+  display: inline-block;
+  text-decoration: none;
+  color: #000000;
+  text-transform: uppercase;
+  border: 2px solid #000000;
+  padding: 5px 10px;
+  font-weight: bold;
+  font-size: 18px;
+  margin-bottom: 10px;
+  transition: all 0.25s ease-in-out;
+}
+
+.route-list a.share-route:hover {
+  background-color: #000000;
+  color: #ffffff;
+}
+
+.route-list > h3 {
+  text-align: left;
+  margin-bottom: 0px;
+}
+
+.routes {
+  margin: 10px auto 20px auto;
+  border-collapse: collapse;
+}
+
+.routes tr {
+  border-bottom: 1px solid #f2f2f2;
+}
+
+.routes tr:first-child h3 {
+  text-align: left;
+  margin: 0px;
+}
+
+.routes th {
+  padding: 16px 0px;
+  font-size: 16px;
+}
+
+.routes td {
+  font-size: 15px;
+  color: #808080;
+  line-height: 1.4;
+  cursor: pointer;
+  padding: 16px 0px 16px 0px;
+  width: 20%;
+  text-align: center;
+  background-color: #ffffff;
+  transition: background-color 0.25s ease-in-out;
+}
+
+.routes tr:nth-child(odd) td {
+  background-color: #f7f7f7;
+}
+
+.routes tr:hover td {
+  background-color: #ebebeb;
+}
+
+.routes th:first-child,
+.routes td:first-child {
+  padding-left: 7px;
+  text-align: left;
+  width: 15%;
+  padding-right: 7px;
+}
+
+.routes th:last-child,
+.routes td:last-child {
+  text-align: center;
+}
+
+.routes td.route-time,
+.routes td.route-seats {
+  width: 10%;
+}
+
+.routes td.route-location,
+.routes td.route-days {
+  width: 30%;
+}
+
+.routes td.route-days {
+  padding: 10px 0px;
+}
+
+.routes .day {
+  background-color: black;
+  color: rgba(255, 255, 255, 0.5);
+  padding: 3px 0px 3px 0px;
+  margin: 4px 0px 4px 4px;
+  font-size: 14px;
+  opacity: 0.2;
+  width: 28px;
+  box-sizing: border-box;
+  display: inline-block;
+  text-align: center;
+}
+
+.routes .day.active {
+  opacity: 0.8;
+  color: #ffffff;
+}

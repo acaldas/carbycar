@@ -20,10 +20,15 @@ const checkAuth = (req, res, next) => {
 };
 
 router.get("/", (req, res) => {
-    Route.find({}, (err, routes) => {
-        routes = routes || [];
-        res.render("route/list", { routes: routes });
-    });
+    Route.find({})
+        .populate("driver")
+        .exec((err, routes) => {
+            routes = routes || [];
+            res.render(
+                "route/list",
+                Object.assign({ routes: routes }, RouteParameters)
+            );
+        });
 });
 
 router.get("/create", checkAuth, (req, res) => {

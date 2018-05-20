@@ -1,0 +1,59 @@
+<html>
+
+<head>
+    <%- include("../partials/head.html") -%>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+        <script type="text/javascript" src="/scripts/route.js" async defer></script>
+</head>
+
+<body>
+    <%- include("../partials/header.html") -%>
+        <div class="content">
+            <div class="route-list">
+                <a class="share-route" href="/routes/create">Partilhar a minha rota</a>
+                <table class="routes">
+                    <tr>
+                        <th colspan="5">
+                            <h3>Rotas disponíveis:</h3>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>Condutor</th>
+                        <th>Origem/Destino</th>
+                        <th>Hora</th>
+                        <th>Dias</th>
+                        <th>Lugares livres</th>
+                    </tr>
+                    <% for(var index = 0; index < routes.length; index++) {
+                        let route = routes[index];
+                     %>
+                        <tr class="route-link" data-url="/routes/<%=route.id%>">
+                            <td class="route-name">
+                                <%=route.driver.name%>
+                            </td>
+                            <td class="route-location">
+                                <%=route.location.text%>
+                            </td>
+                            <td class="route-time">
+                                <%=route.time%>
+                            </td>
+                            <td class="route-days">
+                                <% for(var _index = 0; _index < days_types.length; _index++) {
+                                let day = days_types[_index]; %>
+                                    <span class="day day-small <% if (route.days.includes(day)){%>active<%}%>">
+                                        <%=day[0]%>
+                                    </span>
+                                    <%} %>
+                            </td>
+                            <td class="route-seats">
+                                <%=route.availableSeats%>
+                            </td>
+                        </tr>
+                        <%}%>
+                </table>
+            </div>
+        </div>
+        <%- include("../partials/footer.html") -%>
+</body>
+
+</html>
