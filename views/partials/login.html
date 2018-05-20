@@ -1,18 +1,20 @@
 <% var user = typeof user === "undefined" ? {} : user %>
-    <form class="form form-login" action="/login" method="post">
-        <% if (typeof error !== "undefined") { %>
-            <h3 class="error">
-                <%= error %>
-            </h3>
-            <% } %>
-                <div class="form-field">
-                    <label for="email">Email:</label>
-                    <input type="text" name="email" value="<%= user.email %>" required="true">
-                </div>
-                <div class="form-field">
-                    <label for="password">Password:</label>
-                    <input type="password" name="password" value="<%= user.password %>" required="true">
-                </div>
-                <input class="button" type="submit" value="Login"> ou
-                <a class="button" href="/signup">Criar conta</a>
-    </form>
+    <% var next = typeof next === "undefined" ? "" : next %>
+        <form class="form form-login" action="/login" method="post">
+            <% if (typeof error !== "undefined") { %>
+                <h3 class="error">
+                    <%= error %>
+                </h3>
+                <% } %>
+                    <input name="next" value="<%= next %>" class="hidden">
+                    <div class="form-field">
+                        <label for="email">Email:</label>
+                        <input type="text" name="email" value="<%= user.email %>" required="true">
+                    </div>
+                    <div class="form-field">
+                        <label for="password">Password:</label>
+                        <input type="password" name="password" value="<%= user.password %>" required="true">
+                    </div>
+                    <input class="button" type="submit" value="Login"> ou
+                    <a class="button" href="/signup">Criar conta</a>
+        </form>

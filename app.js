@@ -36,8 +36,10 @@ app.use(
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use(function(req, res, next) {
+    let userId = req.session.userId;
     let email = req.session.email;
     let name = req.session.name;
+    res.locals.userId = userId;
     res.locals.email = email;
     res.locals.name = name;
     res.locals.authenticated = email && email.length;

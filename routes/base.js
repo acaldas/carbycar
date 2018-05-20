@@ -1,7 +1,6 @@
 const express = require("express");
 const config = require("../config");
 const User = require("../models/user");
-const Vehicle = require("../models/vehicle");
 const router = express.Router();
 
 router.get("/", function(req, res) {
@@ -10,25 +9,20 @@ router.get("/", function(req, res) {
 
 router.get("/signup", function(req, res) {
     res.render("signup", {
-        vehicle_types: Vehicle.getVehicleTypes(),
         district_list: config.Districts
     });
 });
 
 router.post("/signup", function(req, res) {
     let userData = req.body;
-    let vehicle = userData.vehicle
-        ? new Vehicle({ type: userData.vehicle })
-        : null;
     User.create(
         {
             email: userData.email,
             password: userData.password,
             name: userData.name,
-            district: userData.district,
-            vehicle: vehicle
+            district: userData.district
         },
-        error => {
+        (error, user) => {
             if (error) {
                 let errorMessage =
                     error.code === 11000
@@ -37,25 +31,26 @@ router.post("/signup", function(req, res) {
                 res.render("signup", {
                     user: userData,
                     error: errorMessage,
-                    vehicle_types: Vehicle.getVehicleTypes(),
                     district_list: config.Districts
                 });
-                return;
+            } else {
+                _login(req, user, () => res.redirect("/"));
             }
-            _login(req, userData, () => res.redirect("/"));
         }
     );
 });
 
 router.get("/login", function(req, res) {
-    res.render("login");
+    let next = req.query.next || "/";
+    res.render("login", { next: next });
 });
 
 router.post("/login", function(req, res) {
     let email = req.body.email;
+    let next = req.body.next || "/";
     User.verifyLogin(email, req.body.password, (valid, user) => {
         if (valid) {
-            _login(req, user, () => res.redirect("/"));
+            _login(req, user, () => res.redirect(next));
         } else {
             res.render("index", { error: "Login inválido" });
         }
@@ -74,6 +69,7 @@ router.get("/logout", function(req, res, next) {
 
 const _login = function(req, user, callback) {
     req.session.regenerate(() => {
+        req.session.userId = user.id;
         req.session.email = user.email;
         req.session.name = user.name;
         callback();

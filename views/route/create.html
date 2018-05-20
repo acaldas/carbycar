@@ -1,0 +1,72 @@
+<html>
+
+<head>
+    <%- include("../partials/head.html") -%>
+</head>
+
+<body>
+    <%- include("../partials/header.html") -%>
+        <div class="content">
+            <% var route = typeof route === "undefined" ? {} : route %>
+                <form class="form form-route" action="/routes" method="post">
+                    <h3>Partilhar rota</h3>
+                    <% var errors = typeof error === "undefined" ? {} : error.errors %>
+                        <% if (typeof error !== "undefined") { %>
+                            <h3 class="error">Rota inválida</h3>
+                            <% } %>
+                                <input name="driver" value="<%= locals.userId %>" class="hidden">
+                                <div class="form-field">
+                                    <label for="vehicle">Viatura</label>
+                                    <select name="vehicle" value="<%= route.vehicle %>" class="<% if ('vehicle' in errors) { %>invalid<% } %>">
+                                        <option selected value disabled hidden>Tipo de viatura</option>
+                                        <% for(var index = 0; index < vehicle_types.length; index++) {
+                                    let vehicle = vehicle_types[index];
+                                    let selected = vehicle === route.vehicle;
+                                %>
+                                            <option value="<%= vehicle %>" <% if (selected) { %>selected
+                                                <% } %>>
+                                                    <%= vehicle %>
+                                            </option>
+                                            <% } %>
+                                    </select>
+                                </div>
+                                <div class="form-field">
+                                    <label for="time">Hora</label>
+                                    <select name="time" value="<%= route.time %>" class="<% if ('time' in errors) { %>invalid<% } %>">
+                                        <% for(var index = 0; index < time_types.length; index++) {
+                                    let time = time_types[index];
+                                    let selected = time === route.time || (!route.time && index === 0);
+                                %>
+                                            <option value="<%= time %>" <% if (selected) { %>selected
+                                                <% } %>>
+                                                    <%= time %>
+                                            </option>
+                                            <% } %>
+                                    </select>
+                                </div>
+                                <div class="form-field">
+                                    <label for="days" class="checkbox-label">Dias da semana</label>
+                                    <% for(var index = 0; index < days_types.length; index++) {
+                                    let day = days_types[index];
+                                    let selected = route.days && route.days.includes(day);
+                                %>
+                                        <input type="checkbox" name="days" value="<%= day %>" id="checkbox_<%= day %>" <% if (selected) { %>checked
+                                        <% } %> class="
+                                            <% if ('days' in errors) { %>invalid
+                                                <% } %>"/>
+                                                    <label for="checkbox_<%= day %>">
+                                                        <%= day %>
+                                                    </label>
+                                                    <% } %>
+                                </div>
+                                <div class="form-field">
+                                    <label for="seats">Lugares disponíveis</label>
+                                    <input type="number" name="seats" value="<%= route.seats || 1 %>" required="true" min="1" max="99" class="<% if ('seats' in errors) { %>invalid<% } %>">
+                                </div>
+                                <input type="submit" value="Partilhar">
+                </form>
+        </div>
+        <%- include("../partials/footer.html") -%>
+</body>
+
+</html>

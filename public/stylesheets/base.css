@@ -34,3 +34,7 @@ button {
 .error {
     color: #ec2125;
 }
+
+.hidden {
+    display: none;
+}
