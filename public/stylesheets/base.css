@@ -38,3 +38,25 @@ button {
 .hidden {
     display: none;
 }
+
+dl {
+    display: inline-block;
+}
+
+dl:after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+dl dt {
+    float: left;
+    font-weight: bold;
+    clear: left;
+}
+
+dl dd {
+    float: left;
+    margin-left: 5px;
+    margin-bottom: 10px;
+}

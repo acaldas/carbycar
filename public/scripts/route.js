@@ -1,3 +1,5 @@
+var school = { latitude: 41.4516899, longitude: -8.2731611 };
+
 (function($) {
     var timePicker = $("select[name='time']");
     var locationLabel = $("label[for='location']");
@@ -15,7 +17,7 @@
 
     $("#location-picker").locationpicker({
         radius: 10,
-        location: { latitude: 41.4516899, longitude: -8.2731611 },
+        location: school,
         inputBinding: {
             locationNameInput: $("input[name='locationText']"),
             latitudeInput: $("input[name='locationLatitude']"),
@@ -23,4 +25,6 @@
         },
         enableAutocomplete: true
     });
+
+    var locations = [];
 })(jQuery);

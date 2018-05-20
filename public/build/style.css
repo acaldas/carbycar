@@ -38,6 +38,28 @@ button {
 .hidden {
   display: none;
 }
+
+dl {
+  display: inline-block;
+}
+
+dl:after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+dl dt {
+  float: left;
+  font-weight: bold;
+  clear: left;
+}
+
+dl dd {
+  float: left;
+  margin-left: 5px;
+  margin-bottom: 10px;
+}
 .signup .form.form-signup h2 {
   margin-top: 0px;
 }
@@ -256,4 +278,11 @@ button {
   font-size: 22px;
   text-decoration: none;
   margin-left: 24px;
+}
+.route .day {
+  background-color: #706f71;
+  color: #ffffff;
+  padding: 5px 8px;
+  margin-right: 5px;
+  font-size: 14px;
 }

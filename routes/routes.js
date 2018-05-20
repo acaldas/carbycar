@@ -30,10 +30,15 @@ router.get("/create", checkAuth, (req, res) => {
 });
 
 router.get("/:id", (req, res) => {
-    let id = req.query.id;
-    Route.findById(id, (err, route) => {
-        res.render("route/show", { route: route });
-    });
+    let id = req.params.id;
+    Route.findById(id)
+        .populate("driver")
+        .populate("passengers.user")
+        .exec((err, route) => {
+            res.render("route/show", {
+                route: route
+            });
+        });
 });
 
 router.post("/", checkAuth, (req, res) => {
@@ -56,7 +61,8 @@ router.post("/", checkAuth, (req, res) => {
             days: routeData.days,
             time: routeData.time,
             seats: routeData.seats,
-            location: location
+            location: location,
+            passengers: []
         },
         (error, route) => {
             if (error) {

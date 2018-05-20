@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const Location = require("../models/location");
 const Passenger = require("../models/passenger");
 const Vehicle = require("./vehicle");
+const config = require("../config");
 
 const Schema = mongoose.Schema;
 
@@ -44,13 +45,37 @@ const RouteSchema = new Schema(
     }
 );
 
-RouteSchema.virtual("availableSeats").get(() => {
+RouteSchema.virtual("availableSeats").get(function() {
     return this.seats - this.passengers.length;
 });
 
-RouteSchema.virtual("isFull").get(() => {
+RouteSchema.virtual("isFull").get(function() {
     return this.availableSeats <= 0;
 });
+
+RouteSchema.methods.getRouteQueryString = function() {
+    let toSchool = this.time === TIME_TYPES[0];
+    let driverLocation = this.location.latitude + "," + this.location.longitude;
+    let schoolLocation = encodeURIComponent(config.School.name);
+    let origin = toSchool ? driverLocation : schoolLocation;
+    let destination = toSchool ? schoolLocation : driverLocation;
+    let waypoints = this.passengers.map(
+        p => p.location.latitude + "," + p.location.longitude
+    );
+    let query =
+        "origin=" + origin + "&destination=" + destination + "&mode=driving";
+
+    waypoints = [
+        "41.45857298561265,-8.263590978235015",
+        "41.45657889577495,-8.278310941308632"
+    ];
+
+    query = waypoints.length
+        ? query + "&waypoints=" + waypoints.join("|") + "&optimizeWaypoints=1"
+        : query;
+
+    return query;
+};
 
 RouteSchema.methods.addPassenger = function(passenger, callback) {
     if (this.isFull) {

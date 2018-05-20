@@ -10,45 +10,52 @@
 <body>
     <%- include("../partials/header.html") -%>
         <div class="content">
+            <h3>Rota:</h3>
             <dl class="route">
-                <dt>Condutor</dt>
+                <dt>Condutor:</dt>
                 <dd>
-                    <%= route.driver %>
+                    <%= route.driver.name + " - " + route.driver.email + " - " + route.location.text %>
                 </dd>
-                <dt>Viatura</dt>
+                <dt>Viatura:</dt>
                 <dd>
-                    <%= route.vehicle %</dd>
-                <dt>Hora</dt>
-                <dd><%= route.time %</dd>
-                <dt>Dias</dt>
-                <dd><% for(var index = 0; index < route.days; index++) {%>
+                    <%= route.vehicle.type %>
+                </dd>
+                <dt>Hora:</dt>
+                <dd>
+                    <%= route.time %>
+                </dd>
+                <dt>Dias:</dt>
+                <dd>
+                    <% for(var index = 0; index < route.days.length; index++) {
                         let day = route.days[index];
+                     %>
                         <span class="day">
                             <%=day%>
                         </span>
                         <%}%>
                 </dd>
-                <dt>Lugares disponíveis</dt>
+                <dt>Lugares disponíveis:</dt>
                 <dd>
-                    <%= route.vehicle %</dd>
+                    <%= route.availableSeats %>
+                </dd>
+                <dt>Passageiros:</dt>
+                <dd>
+                    <% if (route.passengers.length === 0) {%>N/A
+                        <%}%>
+                            <% for(var index = 0; index < route.passengers.length; index++) {
+                        let passenger = route.passengers[index];
+                     %>
+                                <span class="passenger">
+                                    <%=passenger.name + " - " + passenger.email + " - " + passenger.location.text%>
+                                </span>
+                                <%}%>
+                </dd>
+                <dt>Mapa:</dt>
+                <dd class="route-trip">
+                    <iframe width="600" height="450" frameborder="0" style="border:0" allowfullscreen src="<%='https://www.google.com/maps/embed/v1/directions?key=AIzaSyAxhu2M5AiUSx1pI5avx1pgiYmgJfIZ0rQ&' + route.getRouteQueryString()%>">
+                    </iframe>
+                </dd>
             </dl>
-
-        <div class="form-field">
-            <label for="seats">Lugares disponíveis</label>
-            <input type="number" name="seats" value="<%= route.seats || 1 %>" required="true" min="1" max="99" class="
-                        <% if ('seats' in errors) { %>invalid
-                            <% } %>">
-        </div>
-        <div class="form-field">
-            <label for="location">Origem</label>
-            <input name="locationText" value="<%= route.locationText %>" required="true" class="location-input <% if ('location' in errors) { %>invalid<% } %>"
-            />
-            <input name="locationLatitude" value="<%= route.locationLatitude %>" class="hidden" />
-            <input name="locationLongitude" value="<%= route.locationLongitude %>" class="hidden" />
-            <p class="location-help">Arraste o marcador para a sua localização:</p>
-            <div class="location-picker" id="location-picker"></div>
-        </div>
-        <input type="submit" value="Partilhar">
         </div>
         <%- include("../partials/footer.html") -%>
 </body>

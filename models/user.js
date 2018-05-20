@@ -7,7 +7,7 @@ const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
     email: { type: String, required: true, index: { unique: true } },
-    password: { type: String, required: true },
+    password: { type: String, required: true, select: false },
     name: { type: String, required: true },
     district: { type: String, required: true, enum: config.Districts }
 });

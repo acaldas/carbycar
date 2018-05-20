@@ -7,6 +7,7 @@ const session = require("express-session");
 const mongoStore = require("connect-mongo")(session);
 const mongoose = require("mongoose");
 
+const config = require("./config");
 const routes = require("./routes");
 
 const app = express();
@@ -36,6 +37,8 @@ app.use(
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use(function(req, res, next) {
+    res.locals.school = config.School;
+
     let userId = req.session.userId;
     let email = req.session.email;
     let name = req.session.name;
