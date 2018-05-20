@@ -57,6 +57,18 @@ dl dt {
 
 dl dd {
     float: left;
-    margin-left: 5px;
-    margin-bottom: 10px;
+    margin-left: 10px;
+    margin-bottom: 15px;
+}
+
+dl ul {
+    padding-left: 5px;
+    padding-top: 10px;
+    list-style-type: decimal;
+}
+
+.clearfix:after {
+    content: "";
+    display: table;
+    clear: both;
 }

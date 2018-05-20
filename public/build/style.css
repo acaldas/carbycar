@@ -57,8 +57,20 @@ dl dt {
 
 dl dd {
   float: left;
-  margin-left: 5px;
-  margin-bottom: 10px;
+  margin-left: 10px;
+  margin-bottom: 15px;
+}
+
+dl ul {
+  padding-left: 5px;
+  padding-top: 10px;
+  list-style-type: decimal;
+}
+
+.clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
 }
 .signup .form.form-signup h2 {
   margin-top: 0px;
@@ -279,10 +291,40 @@ dl dd {
   text-decoration: none;
   margin-left: 24px;
 }
+.route h2 {
+  text-align: left;
+}
+
 .route .day {
   background-color: #706f71;
   color: #ffffff;
   padding: 5px 8px;
   margin-right: 5px;
   font-size: 14px;
+}
+
+.route .route-trip-label {
+  padding-bottom: 10px;
+}
+
+.route .route-trip {
+  display: block;
+  margin-left: 0px;
+  float: none;
+}
+
+.route .route-trip iframe {
+  margin-top: 10px;
+  border: 2px solid #000000;
+  display: block;
+}
+
+.route .form {
+  display: block;
+  margin-top: 40px;
+}
+
+.route .form .location-picker {
+  width: 400px;
+  height: 320px;
 }

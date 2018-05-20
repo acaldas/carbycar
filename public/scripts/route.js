@@ -25,6 +25,4 @@ var school = { latitude: 41.4516899, longitude: -8.2731611 };
         },
         enableAutocomplete: true
     });
-
-    var locations = [];
 })(jQuery);

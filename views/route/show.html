@@ -10,11 +10,14 @@
 <body>
     <%- include("../partials/header.html") -%>
         <div class="content">
-            <h3>Rota:</h3>
             <dl class="route">
+                <h2>Rota:</h2>
                 <dt>Condutor:</dt>
                 <dd>
-                    <%= route.driver.name + " - " + route.driver.email + " - " + route.location.text %>
+                    <b>
+                        <%= route.driver.name %>
+                    </b>
+                    <%=" - " + route.driver.email + " - " + route.location.text %>
                 </dd>
                 <dt>Viatura:</dt>
                 <dd>
@@ -40,21 +43,41 @@
                 </dd>
                 <dt>Passageiros:</dt>
                 <dd>
-                    <% if (route.passengers.length === 0) {%>N/A
-                        <%}%>
-                            <% for(var index = 0; index < route.passengers.length; index++) {
+                    <ul>
+                        <% if (route.passengers.length === 0) {%>N/A
+                            <%}%>
+                                <% for(var index = 0; index < route.passengers.length; index++) {
                         let passenger = route.passengers[index];
                      %>
-                                <span class="passenger">
-                                    <%=passenger.name + " - " + passenger.email + " - " + passenger.location.text%>
-                                </span>
-                                <%}%>
+                                    <li class="passenger">
+                                        <b>
+                                            <%=passenger.user.name %>
+                                        </b>
+                                        <%=" - " + passenger.user.email + " - " + passenger.location.text%>
+                                    </li>
+                                    <%}%>
+                    </ul>
                 </dd>
-                <dt>Mapa:</dt>
+                <dt class="route-trip-label">Viagem recomendada:</dt>
                 <dd class="route-trip">
-                    <iframe width="600" height="450" frameborder="0" style="border:0" allowfullscreen src="<%='https://www.google.com/maps/embed/v1/directions?key=AIzaSyAxhu2M5AiUSx1pI5avx1pgiYmgJfIZ0rQ&' + route.getRouteQueryString()%>">
+                    <iframe width="500" height="400" frameborder="0" allowfullscreen src="<%='https://www.google.com/maps/embed/v1/directions?key=AIzaSyAxhu2M5AiUSx1pI5avx1pgiYmgJfIZ0rQ&' + route.getRouteQueryString()%>">
                     </iframe>
                 </dd>
+                <% if (locals.userId !== route.driver.id) { %>
+                    <form class="form" method="POST" action="<%=route.id%>/passenger">
+                        <h3>Partilhar boleia</h3>
+                        <input name="userId" value="<%=locals.userId%>" class="hidden" />
+                        <div class="form-field">
+                            <label>Localização: </label>
+                            <input name="locationText" value="<%= route.locationText %>" required="true" class="location-input" />
+                            <input name="locationLatitude" value="<%= route.locationLatitude %>" class="hidden" />
+                            <input name="locationLongitude" value="<%= route.locationLongitude %>" class="hidden" />
+                            <p class="location-help">Arraste o marcador para a sua localização:</p>
+                            <div class="location-picker" id="location-picker"></div>
+                        </div>
+                        <input type="submit" value="Partilhar" />
+                    </form>
+                    <% } %>
             </dl>
         </div>
         <%- include("../partials/footer.html") -%>

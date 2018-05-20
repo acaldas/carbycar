@@ -1,8 +1,9 @@
 const express = require("express");
+const router = express.Router();
 const Location = require("../models/location");
+const Passenger = require("../models/passenger");
 const Route = require("../models/route");
 const Vehicle = require("../models/vehicle");
-const router = express.Router();
 
 const RouteParameters = {
     days_types: Route.getDayTypes(),
@@ -81,6 +82,28 @@ router.post("/", checkAuth, (req, res) => {
             }
         }
     );
+});
+
+router.post("/:id/passenger", checkAuth, (req, res) => {
+    let id = req.params.id;
+    let passengerData = req.body;
+    let location = passengerData.locationText
+        ? new Location({
+              text: passengerData.locationText,
+              latitude: passengerData.locationLatitude,
+              longitude: passengerData.locationLongitude
+          })
+        : null;
+    let passenger = new Passenger({
+        user: passengerData.userId,
+        location: location
+    });
+
+    Route.findById(id, function(error, route) {
+        route.addPassenger(passenger, error => {
+            res.redirect("/routes/" + route.id);
+        });
+    });
 });
 
 module.exports = router;

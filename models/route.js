@@ -65,13 +65,8 @@ RouteSchema.methods.getRouteQueryString = function() {
     let query =
         "origin=" + origin + "&destination=" + destination + "&mode=driving";
 
-    waypoints = [
-        "41.45857298561265,-8.263590978235015",
-        "41.45657889577495,-8.278310941308632"
-    ];
-
     query = waypoints.length
-        ? query + "&waypoints=" + waypoints.join("|") + "&optimizeWaypoints=1"
+        ? query + "&waypoints=" + waypoints.join("|")
         : query;
 
     return query;
