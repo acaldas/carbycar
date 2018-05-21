@@ -43,9 +43,9 @@
                 </dd>
                 <dt>Passageiros:</dt>
                 <dd>
-                    <ul>
-                        <% if (route.passengers.length === 0) {%>N/A
-                            <%}%>
+                    <% if (route.passengers.length === 0) {%>N/A
+                        <%}%>
+                            <ul>
                                 <% for(var index = 0; index < route.passengers.length; index++) {
                         let passenger = route.passengers[index];
                      %>
@@ -56,7 +56,7 @@
                                         <%=" - " + passenger.user.email + " - " + passenger.location.text%>
                                     </li>
                                     <%}%>
-                    </ul>
+                            </ul>
                 </dd>
                 <dt class="route-trip-label">Viagem recomendada:</dt>
                 <dd class="route-trip">

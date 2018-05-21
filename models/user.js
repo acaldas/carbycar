@@ -29,17 +29,19 @@ UserSchema.pre("save", function(next) {
 });
 
 UserSchema.statics.verifyLogin = function(email, password, callback) {
-    User.findOne({ email: email }, function(err, user) {
-        if (err || !user) {
-            callback(false);
-            return;
-        }
+    User.findOne()
+        .select("+password")
+        .exec({ email: email }, function(err, user) {
+            if (err || !user) {
+                callback(false);
+                return;
+            }
 
-        user._comparePassword(password, function(err, isMatch) {
-            if (err) throw err;
-            callback(isMatch, user);
+            user._comparePassword(password, function(err, isMatch) {
+                if (err) throw err;
+                callback(isMatch, user);
+            });
         });
-    });
 };
 
 UserSchema.methods._comparePassword = function(candidatePassword, callback) {
