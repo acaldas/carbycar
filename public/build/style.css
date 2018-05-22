@@ -72,6 +72,12 @@ dl ul {
   display: table;
   clear: both;
 }
+
+@media (max-device-width: 475px) {
+  .button {
+    padding: 10px 20px;
+  }
+}
 .signup .form.form-signup h2 {
   margin-top: 0px;
 }
@@ -225,6 +231,38 @@ dl ul {
   border: 2px solid #000000;
   margin-bottom: 20px;
 }
+
+.form.form-login {
+  text-align: center;
+}
+
+.form.form-login input {
+  min-width: 250px;
+  box-sizing: border-box;
+}
+
+.form.form-login input[type="submit"] {
+  margin-bottom: 10px;
+}
+
+.form.form-login .button {
+  margin-top: 10px;
+  text-align: center;
+  display: block;
+}
+
+@media (max-device-width: 475px) {
+  .form input,
+  .form select {
+    min-width: 250px;
+    box-sizing: border-box;
+  }
+
+  .form.form input[type="submit"],
+  .form .button {
+    padding: 10px 20px;
+  }
+}
 .header {
   background-size: contain;
   width: 100%;
@@ -278,6 +316,16 @@ dl ul {
 
 .header .slogan span {
   color: #ec2125;
+}
+
+@media (max-device-width: 475px) {
+  .header {
+    height: 325px;
+  }
+
+  .header .logo {
+    top: 40%;
+  }
 }
 .navbar {
   background-color: #706f71;

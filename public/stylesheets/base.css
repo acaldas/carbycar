@@ -72,3 +72,9 @@ dl ul {
     display: table;
     clear: both;
 }
+
+@media (max-device-width: 475px) {
+    .button {
+        padding: 10px 20px;
+    }
+}
