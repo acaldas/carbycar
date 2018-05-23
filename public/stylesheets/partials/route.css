@@ -15,9 +15,9 @@
 }
 
 .route .route-trip {
-    display: block;
     margin-left: 0px;
-    float: none;
+    float: left;
+    clear: both;
 }
 
 .route .route-trip iframe {
@@ -34,6 +34,27 @@
 .route .form .location-picker {
     width: 400px;
     height: 320px;
+}
+
+.route .form.form-remove_passenger {
+    margin: 2px 0px 0px 4px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.route .form.form-remove_passenger input {
+    color: #ec2125;
+    background: initial;
+    border: initial;
+    border-bottom: 1px solid #ec2125;
+    padding: 0px;
+    margin: 0px;
+    transition: all 0.25s ease-in-out;
+}
+
+.route .form.form-remove_passenger input:hover {
+    color: #7b0a0c;
+    border-color: #7b0a0c;
 }
 
 .route-list a.share-route {

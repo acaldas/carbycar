@@ -80,6 +80,13 @@ RouteSchema.methods.addPassenger = function(passenger, callback) {
     this.save(callback);
 };
 
+RouteSchema.methods.removePassenger = function(passenger, callback) {
+    this.passengers = this.passengers.filter(p => {
+        p.user.toString() !== passenger;
+    });
+    this.save(callback);
+};
+
 RouteSchema.statics.getDayTypes = function() {
     return DAY_TYPES;
 };

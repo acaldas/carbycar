@@ -54,6 +54,11 @@
                                             <%=passenger.user.name %>
                                         </b>
                                         <%=" - " + passenger.user.email + " - " + passenger.location.text%>
+                                            <% if (locals.userId === route.driver.id) { %>
+                                                <form class="form form-remove_passenger" method="POST" action="<%=route.id + '/remove/' + passenger.user.id%>">
+                                                    <input type="submit" value="Remover">
+                                                </form>
+                                                <% } %>
                                     </li>
                                     <%}%>
                             </ul>

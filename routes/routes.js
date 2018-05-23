@@ -111,4 +111,18 @@ router.post("/:id/passenger", checkAuth, (req, res) => {
     });
 });
 
+router.post("/:id/remove/:passenger", checkAuth, (req, res) => {
+    let id = req.params.id;
+    let passenger = req.params.passenger;
+
+    Route.findById(id, function(error, route) {
+        if (route.driver.toString() !== req.session.userId) {
+            return res.redirect("/routes/" + route.id);
+        }
+        route.removePassenger(id, error => {
+            res.redirect("/routes/" + route.id);
+        });
+    });
+});
+
 module.exports = router;
