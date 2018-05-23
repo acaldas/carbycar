@@ -379,6 +379,8 @@ dl ul li {
 .route .form {
   display: block;
   margin-top: 40px;
+  overflow: hidden;
+  clear: left;
 }
 
 .route .form .location-picker {
@@ -386,13 +388,20 @@ dl ul li {
   height: 320px;
 }
 
-.route .form.form-remove_passenger {
-  margin: 2px 0px 0px 4px;
-  display: inline-block;
-  vertical-align: top;
+.route .form.form-delete {
+  text-align: center;
+  padding-top: 20px;
 }
 
-.route .form.form-remove_passenger input {
+.route .form.form-remove_passenger {
+  margin: 0px 0px 0px 4px;
+  display: inline-block;
+  vertical-align: top;
+  overflow: hidden;
+}
+
+.route .form.form-remove_passenger input,
+.route .form.form-delete input {
   color: #ec2125;
   background: transparent none repeat 0 0 / auto auto padding-box border-box scroll;
   background: initial;
@@ -402,6 +411,10 @@ dl ul li {
   padding: 0px;
   margin: 0px;
   transition: all 0.25s ease-in-out;
+}
+
+.route .form.form-delete input {
+  font-size: 22px;
 }
 
 .route .form.form-remove_passenger input:hover {
@@ -514,4 +527,12 @@ dl ul li {
 .routes .day.active {
   opacity: 0.8;
   color: #ffffff;
+}
+
+@media (max-device-width: 475px) {
+  .route .form input,
+  .form select {
+    min-width: 0;
+    min-width: initial;
+  }
 }

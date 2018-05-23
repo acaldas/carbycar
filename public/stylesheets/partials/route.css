@@ -29,6 +29,8 @@
 .route .form {
     display: block;
     margin-top: 40px;
+    overflow: hidden;
+    clear: left;
 }
 
 .route .form .location-picker {
@@ -36,13 +38,20 @@
     height: 320px;
 }
 
-.route .form.form-remove_passenger {
-    margin: 2px 0px 0px 4px;
-    display: inline-block;
-    vertical-align: top;
+.route .form.form-delete {
+    text-align: center;
+    padding-top: 20px;
 }
 
-.route .form.form-remove_passenger input {
+.route .form.form-remove_passenger {
+    margin: 0px 0px 0px 4px;
+    display: inline-block;
+    vertical-align: top;
+    overflow: hidden;
+}
+
+.route .form.form-remove_passenger input,
+.route .form.form-delete input {
     color: #ec2125;
     background: initial;
     border: initial;
@@ -50,6 +59,10 @@
     padding: 0px;
     margin: 0px;
     transition: all 0.25s ease-in-out;
+}
+
+.route .form.form-delete input {
+    font-size: 22px;
 }
 
 .route .form.form-remove_passenger input:hover {
@@ -162,4 +175,11 @@
 .routes .day.active {
     opacity: 0.8;
     color: #ffffff;
+}
+
+@media (max-device-width: 475px) {
+    .route .form input,
+    .form select {
+        min-width: initial;
+    }
 }

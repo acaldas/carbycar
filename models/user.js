@@ -29,9 +29,9 @@ UserSchema.pre("save", function(next) {
 });
 
 UserSchema.statics.verifyLogin = function(email, password, callback) {
-    User.findOne()
+    User.findOne({ email: email })
         .select("+password")
-        .exec({ email: email }, function(err, user) {
+        .exec(function(err, user) {
             if (err || !user) {
                 callback(false);
                 return;

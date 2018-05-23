@@ -54,7 +54,7 @@
                                             <%=passenger.user.name %>
                                         </b>
                                         <%=" - " + passenger.user.email + " - " + passenger.location.text%>
-                                            <% if (locals.userId === route.driver.id) { %>
+                                            <% if (locals.userId === route.driver.id || locals.userId === passenger.user.id) { %>
                                                 <form class="form form-remove_passenger" method="POST" action="<%=route.id + '/remove/' + passenger.user.id%>">
                                                     <input type="submit" value="Remover">
                                                 </form>
@@ -82,8 +82,13 @@
                         </div>
                         <input type="submit" value="Partilhar" />
                     </form>
-                    <% } %>
+                    <% } else { %>
+                        <form class="form form-delete" method="POST" action="<%=route.id%>/delete">
+                            <input type="submit" value="Eliminar rota">
+                        </form>
+                        <% } %>
             </dl>
+
         </div>
         <%- include("../partials/footer.html") -%>
 </body>

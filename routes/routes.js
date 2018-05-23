@@ -116,12 +116,30 @@ router.post("/:id/remove/:passenger", checkAuth, (req, res) => {
     let passenger = req.params.passenger;
 
     Route.findById(id, function(error, route) {
-        if (route.driver.toString() !== req.session.userId) {
-            return res.redirect("/routes/" + route.id);
-        }
-        route.removePassenger(id, error => {
+        if ([route.driver.toString(), passenger].includes(req.session.userId)) {
+            route.removePassenger(passenger, error => {
+                res.redirect("/routes/" + route.id);
+            });
+        } else {
             res.redirect("/routes/" + route.id);
-        });
+        }
+    });
+});
+
+router.post("/:id/delete", checkAuth, (req, res) => {
+    let id = req.params.id;
+    Route.findById(id, function(error, route) {
+        if (route.driver.toString() !== req.session.userId) {
+            res.redirect("/routes/" + route.id);
+        } else {
+            Route.deleteOne(
+                { _id: id },
+                error =>
+                    error
+                        ? res.redirect("/routes/" + route.id)
+                        : res.redirect("/routes")
+            );
+        }
     });
 });
 

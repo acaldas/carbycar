@@ -82,7 +82,7 @@ RouteSchema.methods.addPassenger = function(passenger, callback) {
 
 RouteSchema.methods.removePassenger = function(passenger, callback) {
     this.passengers = this.passengers.filter(p => {
-        p.user.toString() !== passenger;
+        return p.user.toString() !== passenger;
     });
     this.save(callback);
 };
