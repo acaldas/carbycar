@@ -348,6 +348,10 @@ dl ul li {
   text-decoration: none;
   margin-left: 24px;
 }
+
+.navbar a.welcome {
+  float: left;
+}
 .route h2 {
   text-align: left;
 }

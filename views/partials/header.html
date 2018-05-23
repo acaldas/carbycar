@@ -1,13 +1,18 @@
 <div class="navbar">
-    <a href="/">Home</a>
-    <a href="manual.pdf" target="_blank" type="application/pdf">Ajuda</a>
     <% if (locals.authenticated) { %>
-        <a href="/routes %>">Rotas</a>
-        <a href="/logout">Sair</a>
-        <% } else { %>
-            <a href="/login">Login</a>
-            <a href="/signup">Criar conta</a>
-            <% } %>
+        <a class="welcome">Bem-vindo
+            <%=locals.name%>
+        </a>
+        <% } %>
+            <a href="/">Home</a>
+            <a href="manual.pdf" target="_blank" type="application/pdf">Ajuda</a>
+            <% if (locals.authenticated) { %>
+                <a href="/routes %>">Rotas</a>
+                <a href="/logout">Sair</a>
+                <% } else { %>
+                    <a href="/login">Login</a>
+                    <a href="/signup">Criar conta</a>
+                    <% } %>
 </div>
 <div class="header">
     <img class="logo" src="/images/logo.png">
